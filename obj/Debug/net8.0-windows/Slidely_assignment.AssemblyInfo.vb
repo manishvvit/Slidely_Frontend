@@ -16,7 +16,7 @@ Imports System.Reflection
 <Assembly: System.Reflection.AssemblyCompanyAttribute("Slidely_assignment"),  _
  Assembly: System.Reflection.AssemblyConfigurationAttribute("Debug"),  _
  Assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0"),  _
- Assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c29464ce6729b60b12b79e75d7387ea0a7aad879"),  _
+ Assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+55dec3757c8dc81cb18775aac6ab1f4bb59e2e1b"),  _
  Assembly: System.Reflection.AssemblyProductAttribute("Slidely_assignment"),  _
  Assembly: System.Reflection.AssemblyTitleAttribute("Slidely_assignment"),  _
  Assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0"),  _

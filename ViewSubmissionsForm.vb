@@ -82,7 +82,7 @@ Public Class ViewSubmissionsForm
     ' Edit the current submission
     Private Async Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
         Try
-            Using client As New HttpClient()
+            Using client As New HttpClient
                 Dim updatedSubmission As New JObject From {
                     {"name", txtName.Text},
                     {"email", txtEmail.Text},
@@ -92,7 +92,7 @@ Public Class ViewSubmissionsForm
                 }
 
                 ' Use System.Text.Encoding.UTF8 for encoding
-                Dim content = New StringContent(updatedSubmission.ToString(), Encoding.UTF8, "application/json")
+                Dim content = New StringContent(updatedSubmission.ToString, Encoding.UTF8, "application/json")
                 Dim response = Await client.PutAsync($"{baseUrl}/edit?index={currentIndex}", content)
                 response.EnsureSuccessStatusCode()
 
@@ -120,6 +120,44 @@ Public Class ViewSubmissionsForm
             End Using
         Catch ex As Exception
             MessageBox.Show($"Error deleting submission: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    ' Search for submissions
+    Private Async Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        Dim query As String = txtSearch.Text.Trim()
+
+        If String.IsNullOrEmpty(query) Then
+            MessageBox.Show("Please enter a search term.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return
+        End If
+
+        Try
+            Using client As New HttpClient()
+                Dim response = Await client.GetAsync($"{baseUrl}/search?query={query}")
+                response.EnsureSuccessStatusCode()
+
+                Dim searchResultsJson = Await response.Content.ReadAsStringAsync()
+                Dim searchResults As JArray = JArray.Parse(searchResultsJson)
+
+                If searchResults.Count > 0 Then
+                    ' Display the first search result (or handle multiple results as needed)
+                    Dim firstResult As JObject = searchResults(0)
+                    txtName.Text = firstResult("name").ToString()
+                    txtEmail.Text = firstResult("email").ToString()
+                    txtPhone.Text = firstResult("phone").ToString()
+                    txtGitHub.Text = firstResult("github").ToString()
+                    txtStopwatchTime.Text = firstResult("stopwatchTime").ToString()
+
+                    ' Set currentIndex to the index of the found submission if needed
+                    ' Assuming server returns index or some identifier
+                    currentIndex = 0 ' This is a placeholder, adjust as needed
+                Else
+                    MessageBox.Show("No matching submissions found.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+            End Using
+        Catch ex As Exception
+            MessageBox.Show($"Error searching submissions: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 End Class
