@@ -41,4 +41,4 @@ To set up the project on your local machine, follow these steps:
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/yourusername/Slidely_Frontend.git
+   git clone https://github.com/manishvvit/Slidely_Frontend.git
