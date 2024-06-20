@@ -1,5 +1,6 @@
 ﻿Imports System.Net.Http
 Imports Newtonsoft.Json.Linq
+Imports System.Text
 
 Public Class ViewSubmissionsForm
     Private currentIndex As Integer = 0
@@ -29,10 +30,14 @@ Public Class ViewSubmissionsForm
 
                     ' Update button states
                     btnPrevious.Enabled = currentIndex > 0
-                    btnNext.Enabled = True ' We'll enable Next and handle its click event
+                    btnNext.Enabled = True
+                    btnEdit.Enabled = True
+                    btnDelete.Enabled = True
                 Else
                     MessageBox.Show("Submission not found.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     btnNext.Enabled = False
+                    btnEdit.Enabled = False
+                    btnDelete.Enabled = False
                 End If
             End Using
         Catch ex As Exception
@@ -44,6 +49,8 @@ Public Class ViewSubmissionsForm
                     MessageBox.Show("No more submissions available in this direction.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 End If
                 btnNext.Enabled = False
+                btnEdit.Enabled = False
+                btnDelete.Enabled = False
             Else
                 ' General error handling
                 MessageBox.Show($"Error fetching submissions: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -72,26 +79,47 @@ Public Class ViewSubmissionsForm
         End If
     End Sub
 
-    ' Function to fetch total number of submissions
-    Private Async Function FetchTotalSubmissionsCount() As Task(Of Integer)
+    ' Edit the current submission
+    Private Async Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
         Try
             Using client As New HttpClient()
-                Dim response = Await client.GetAsync($"{baseUrl}/count")
+                Dim updatedSubmission As New JObject From {
+                    {"name", txtName.Text},
+                    {"email", txtEmail.Text},
+                    {"phone", txtPhone.Text},
+                    {"github", txtGitHub.Text},
+                    {"stopwatchTime", txtStopwatchTime.Text}
+                }
+
+                ' Use System.Text.Encoding.UTF8 for encoding
+                Dim content = New StringContent(updatedSubmission.ToString(), Encoding.UTF8, "application/json")
+                Dim response = Await client.PutAsync($"{baseUrl}/edit?index={currentIndex}", content)
                 response.EnsureSuccessStatusCode()
 
-                Dim countJson = Await response.Content.ReadAsStringAsync()
-                Dim countData As JObject = JObject.Parse(countJson)
-
-                ' Assuming countData is an object with a property "count"
-                If countData.ContainsKey("count") Then
-                    Return Integer.Parse(countData("count").ToString())
-                Else
-                    Return 0 ' If count property is not found, return 0 or handle accordingly
-                End If
+                MessageBox.Show("Submission updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End Using
         Catch ex As Exception
-            MessageBox.Show($"Error fetching total submissions count: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return 0
+            MessageBox.Show($"Error updating submission: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
-    End Function
+    End Sub
+
+    ' Delete the current submission
+    Private Async Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        Try
+            Using client As New HttpClient()
+                Dim response = Await client.DeleteAsync($"{baseUrl}/delete?index={currentIndex}")
+                response.EnsureSuccessStatusCode()
+
+                MessageBox.Show("Submission deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                ' After deletion, try to fetch the next submission or previous if at the end
+                If currentIndex > 0 Then
+                    currentIndex -= 1
+                End If
+                Await FetchSubmission(currentIndex)
+            End Using
+        Catch ex As Exception
+            MessageBox.Show($"Error deleting submission: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
 End Class

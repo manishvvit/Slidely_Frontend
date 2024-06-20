@@ -19,3 +19,4 @@ C:\Users\USER\source\repos\Slidely_assignment\obj\Debug\net8.0-windows\refint\Sl
 C:\Users\USER\source\repos\Slidely_assignment\obj\Debug\net8.0-windows\Slidely_assignment.pdb
 C:\Users\USER\source\repos\Slidely_assignment\obj\Debug\net8.0-windows\Slidely_assignment.genruntimeconfig.cache
 C:\Users\USER\source\repos\Slidely_assignment\obj\Debug\net8.0-windows\ref\Slidely_assignment.dll
+C:\Users\USER\source\repos\Slidely_assignment\obj\Debug\net8.0-windows\Slidely_assignment.sourcelink.json

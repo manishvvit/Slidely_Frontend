@@ -34,12 +34,14 @@ Partial Class ViewSubmissionsForm
         btnNext = New Button()
         lblStopwatchTime = New Label()
         txtStopwatchTime = New TextBox()
+        btnDelete = New Button()
+        btnEdit = New Button()
         SuspendLayout()
         ' 
         ' lblName
         ' 
         lblName.AutoSize = True
-        lblName.Font = New Font("Segoe UI", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblName.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblName.Location = New Point(111, 38)
         lblName.Name = "lblName"
         lblName.Size = New Size(83, 32)
@@ -49,7 +51,7 @@ Partial Class ViewSubmissionsForm
         ' lblEmail
         ' 
         lblEmail.AutoSize = True
-        lblEmail.Font = New Font("Segoe UI", 12.0F)
+        lblEmail.Font = New Font("Segoe UI", 12F)
         lblEmail.Location = New Point(111, 100)
         lblEmail.Name = "lblEmail"
         lblEmail.Size = New Size(76, 32)
@@ -59,7 +61,7 @@ Partial Class ViewSubmissionsForm
         ' lblPhone
         ' 
         lblPhone.AutoSize = True
-        lblPhone.Font = New Font("Segoe UI", 12.0F)
+        lblPhone.Font = New Font("Segoe UI", 12F)
         lblPhone.Location = New Point(111, 162)
         lblPhone.Name = "lblPhone"
         lblPhone.Size = New Size(87, 32)
@@ -69,7 +71,7 @@ Partial Class ViewSubmissionsForm
         ' Label4
         ' 
         Label4.AutoSize = True
-        Label4.Font = New Font("Segoe UI", 12.0F)
+        Label4.Font = New Font("Segoe UI", 12F)
         Label4.Location = New Point(111, 219)
         Label4.Name = "Label4"
         Label4.Size = New Size(94, 32)
@@ -78,7 +80,7 @@ Partial Class ViewSubmissionsForm
         ' 
         ' txtName
         ' 
-        txtName.Font = New Font("Segoe UI", 12.0F)
+        txtName.Font = New Font("Segoe UI", 12F)
         txtName.Location = New Point(222, 38)
         txtName.Margin = New Padding(3, 4, 3, 4)
         txtName.Name = "txtName"
@@ -87,7 +89,7 @@ Partial Class ViewSubmissionsForm
         ' 
         ' txtEmail
         ' 
-        txtEmail.Font = New Font("Segoe UI", 12.0F)
+        txtEmail.Font = New Font("Segoe UI", 12F)
         txtEmail.Location = New Point(222, 100)
         txtEmail.Margin = New Padding(3, 4, 3, 4)
         txtEmail.Name = "txtEmail"
@@ -96,7 +98,7 @@ Partial Class ViewSubmissionsForm
         ' 
         ' txtPhone
         ' 
-        txtPhone.Font = New Font("Segoe UI", 12.0F)
+        txtPhone.Font = New Font("Segoe UI", 12F)
         txtPhone.Location = New Point(222, 162)
         txtPhone.Margin = New Padding(3, 4, 3, 4)
         txtPhone.Name = "txtPhone"
@@ -105,7 +107,7 @@ Partial Class ViewSubmissionsForm
         ' 
         ' txtGitHub
         ' 
-        txtGitHub.Font = New Font("Segoe UI", 12.0F)
+        txtGitHub.Font = New Font("Segoe UI", 12F)
         txtGitHub.Location = New Point(222, 219)
         txtGitHub.Margin = New Padding(3, 4, 3, 4)
         txtGitHub.Name = "txtGitHub"
@@ -117,7 +119,7 @@ Partial Class ViewSubmissionsForm
         btnPrevious.BackColor = Color.FromArgb(CByte(255), CByte(255), CByte(128))
         btnPrevious.FlatAppearance.BorderSize = 0
         btnPrevious.FlatStyle = FlatStyle.Flat
-        btnPrevious.Font = New Font("Segoe UI", 8.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnPrevious.Font = New Font("Segoe UI", 8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnPrevious.Location = New Point(120, 320)
         btnPrevious.Margin = New Padding(3, 4, 3, 4)
         btnPrevious.Name = "btnPrevious"
@@ -131,7 +133,7 @@ Partial Class ViewSubmissionsForm
         btnNext.BackColor = Color.LightBlue
         btnNext.FlatAppearance.BorderSize = 0
         btnNext.FlatStyle = FlatStyle.Flat
-        btnNext.Font = New Font("Segoe UI", 8.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnNext.Font = New Font("Segoe UI", 8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnNext.Location = New Point(363, 322)
         btnNext.Margin = New Padding(3, 4, 3, 4)
         btnNext.Name = "btnNext"
@@ -143,7 +145,7 @@ Partial Class ViewSubmissionsForm
         ' lblStopwatchTime
         ' 
         lblStopwatchTime.AutoSize = True
-        lblStopwatchTime.Font = New Font("Segoe UI", 12.0F)
+        lblStopwatchTime.Font = New Font("Segoe UI", 12F)
         lblStopwatchTime.Location = New Point(111, 275)
         lblStopwatchTime.Name = "lblStopwatchTime"
         lblStopwatchTime.Size = New Size(72, 32)
@@ -152,18 +154,48 @@ Partial Class ViewSubmissionsForm
         ' 
         ' txtStopwatchTime
         ' 
-        txtStopwatchTime.Font = New Font("Segoe UI", 12.0F)
+        txtStopwatchTime.Font = New Font("Segoe UI", 12F)
         txtStopwatchTime.Location = New Point(222, 275)
         txtStopwatchTime.Margin = New Padding(3, 4, 3, 4)
         txtStopwatchTime.Name = "txtStopwatchTime"
         txtStopwatchTime.Size = New Size(277, 39)
         txtStopwatchTime.TabIndex = 11
         ' 
+        ' btnDelete
+        ' 
+        btnDelete.BackColor = Color.FromArgb(CByte(255), CByte(255), CByte(128))
+        btnDelete.FlatAppearance.BorderSize = 0
+        btnDelete.FlatStyle = FlatStyle.Flat
+        btnDelete.Font = New Font("Segoe UI", 8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnDelete.Location = New Point(581, 238)
+        btnDelete.Margin = New Padding(3, 4, 3, 4)
+        btnDelete.Name = "btnDelete"
+        btnDelete.Size = New Size(211, 52)
+        btnDelete.TabIndex = 12
+        btnDelete.Text = "Delete"
+        btnDelete.UseVisualStyleBackColor = False
+        ' 
+        ' btnEdit
+        ' 
+        btnEdit.BackColor = Color.FromArgb(CByte(255), CByte(255), CByte(128))
+        btnEdit.FlatAppearance.BorderSize = 0
+        btnEdit.FlatStyle = FlatStyle.Flat
+        btnEdit.Font = New Font("Segoe UI", 8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnEdit.Location = New Point(581, 155)
+        btnEdit.Margin = New Padding(3, 4, 3, 4)
+        btnEdit.Name = "btnEdit"
+        btnEdit.Size = New Size(211, 52)
+        btnEdit.TabIndex = 13
+        btnEdit.Text = "Edit"
+        btnEdit.UseVisualStyleBackColor = False
+        ' 
         ' ViewSubmissionsForm
         ' 
-        AutoScaleDimensions = New SizeF(10.0F, 25.0F)
+        AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(538, 389)
+        ClientSize = New Size(829, 389)
+        Controls.Add(btnEdit)
+        Controls.Add(btnDelete)
         Controls.Add(txtStopwatchTime)
         Controls.Add(lblStopwatchTime)
         Controls.Add(btnNext)
@@ -176,7 +208,7 @@ Partial Class ViewSubmissionsForm
         Controls.Add(lblPhone)
         Controls.Add(lblEmail)
         Controls.Add(lblName)
-        Font = New Font("Segoe UI", 9.0F)
+        Font = New Font("Segoe UI", 9F)
         Margin = New Padding(3, 5, 3, 5)
         Name = "ViewSubmissionsForm"
         StartPosition = FormStartPosition.CenterScreen
@@ -198,4 +230,6 @@ Partial Class ViewSubmissionsForm
     Friend WithEvents btnNext As System.Windows.Forms.Button
     Friend WithEvents lblStopwatchTime As System.Windows.Forms.Label
     Friend WithEvents txtStopwatchTime As System.Windows.Forms.TextBox
+    Friend WithEvents btnDelete As Button
+    Friend WithEvents btnEdit As Button
 End Class
